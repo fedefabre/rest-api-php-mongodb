@@ -10,7 +10,6 @@ class dbHandler {
   public $skip;
 
   function __construct($_page) {
-
     $m = new MongoDB\Client("mongodb://localhost:27017");
     $this->db = $m->todolist;
     $this->collection = $m->todolist->todo;
@@ -19,13 +18,11 @@ class dbHandler {
     if(!$this->page){$this->page = '1';}
     $this->limit = 5;
     $this->skip = ($this->page - 1) * $this->limit;
-
   }
 
   //Get All Tasks created
   public function getAllTasks()
   {
-
     $cursor = $this->collection->find([], [ 'limit' => $this->limit, 'skip' => $this->skip ]);
     $total = $this->collection->count();
     $args = array();
@@ -46,13 +43,11 @@ class dbHandler {
     array_push($args,self::pagination($total));
 
     return $args;
-
   }
 
   // Receive filter parameters and send tasks that match
   public function getFilterTasks($array)
   {
-
     $filters = array();
 
     foreach(array_keys($array) as $key){
@@ -90,13 +85,11 @@ class dbHandler {
     array_push($args,self::pagination($total));
 
     return $args;
-
   }
 
   // Show an specific task determinated by id
   public function getOneTask($id)
   {
-
     $document = $this->collection->findOne(array('_id' => $id));
     $args = array(
          "id" => $document["_id"],
@@ -109,13 +102,11 @@ class dbHandler {
       );
 
     return $args;
-
   }
 
   // Edit an specific task determinated by id
   public function editTask($id,$parameters)
   {
-
     $this->collection->updateOne(
     array('_id' => $id),
     array('$set' => $parameters),
@@ -123,34 +114,28 @@ class dbHandler {
     );
 
     return 1;
-
   }
 
   // Insert a new task
   public function insertTask($parameters)
   {
-
     $id = self::getNextId("taskid");
     $parameters['_id'] = $id;
     $this->collection->insertOne($parameters);
 
     return $id;
-
   }
 
   // Remove a task by a given id
   public function removeTask($id)
   {
-
     $this->collection->deleteOne(array('_id' => $id));
     return 1;
-
   }
 
-  // This method creates the pagination system and works only inside the object
+  // - This method creates the pagination system and works only inside the object
   private function pagination($total)
   {
-
     $next  = ($this->page + 1);
     $prev  = ($this->page - 1);
 
@@ -163,12 +148,10 @@ class dbHandler {
       );
 
     return $pagination;
-
   }
 
   // This method get the next id creating an auto_incremet identificator for any task
   private function getNextId($name) {
-
     $retval = $this->db->command(array(
       "findandmodify" => "counters",
       "query" => array("_id"=> $name),
@@ -179,8 +162,5 @@ class dbHandler {
     $id = $counters->findOne(array('_id' => $name));
     return $id["seq"];
   }
-
-
 }
-
 ?>

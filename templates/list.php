@@ -115,7 +115,7 @@
   <div class="row">
     <div class="col">
         <hr>
-        <p>REST web api PHP-MongoDB developed by <a href="https://federicofabre.com">Federico Fabre</a>. Check this code on my <a href="#">Github</a>. </p>
+        <p>REST web api PHP-MongoDB developed by <a href="https://federicofabre.com">Federico Fabre</a>. Check this code on my <a href="https://github.com/fedefabre/rest-api-php-mongodb">GitHub</a>. </p>
     </div>
   </div>
 
