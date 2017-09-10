@@ -114,6 +114,9 @@
 
   <div class="row">
     <div class="col">
+        <div class="alert alert-warning" role="alert">
+          <strong>Hey!</strong> This app deletes database automatically every 30 minutes.
+        </div>
         <hr>
         <p>REST web api PHP-MongoDB developed by <a href="https://federicofabre.com">Federico Fabre</a>. Check this code on my <a href="https://github.com/fedefabre/rest-api-php-mongodb">GitHub</a>. </p>
     </div>

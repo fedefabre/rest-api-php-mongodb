@@ -133,6 +133,13 @@ class dbHandler {
     return 1;
   }
 
+  // Remove multiple tasks by a given condition
+  public function removeMultiple($condition)
+  {
+    $this->collection->deleteMany($condition);
+    return 1;
+  }
+
   // - This method creates the pagination system and works only inside the object
   private function pagination($total)
   {
